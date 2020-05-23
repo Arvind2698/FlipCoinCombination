@@ -1,0 +1,2 @@
+# FlipCoinCombination
+Shell script program
