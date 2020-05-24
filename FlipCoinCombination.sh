@@ -3,10 +3,6 @@
 echo Welcon to the flip coin combination program
 
 
-#VARIABLES
-headWinCounter=0
-tailWinCounter=0
-
 declare -A result1
 
 
@@ -111,6 +107,105 @@ for i in ${!result2[@]}
 do
    percentWin=$( echo ${result2[$i]} $iteration | awk '{print $1/$2 * 100}' )
    echo "$i => $percentWin %"
+done
+
+
+declare -A result3
+
+echo The Triple Coin Toss
+
+for ((count=0;count<$iteration;count++))
+do
+
+    flip1=$((RANDOM%2))
+    flip2=$((RANDOM%2))
+    flip3=$((RANDOM%2))
+
+    if [[ $flip1 -eq 1 ]]
+    then
+        if [[ $flip2 -eq 1 ]]
+        then
+            if [[ $flip3 -eq 1 ]]
+            then
+                if [[ ${result3["HHH"]} -eq null ]]
+                then
+                    result3["HHH"]=1
+                else
+                    result3["HHH"]=$((${result3["HHH"]}+1))
+                fi
+            else
+                if [[ ${result3["HHT"]} -eq null ]]
+                then
+                    result3["HHT"]=1
+                else
+                    result3["HHT"]=$((${result3["HHT"]}+1))
+                fi
+            fi
+        else
+            if [[ $flip3 -eq 1 ]]
+            then
+                if [[ ${result3["HTH"]} -eq null ]]
+                then
+                    result3["HTH"]=1
+                else
+                    result3["HTH"]=$((${result3["HTH"]}+1))
+                fi
+            else
+                if [[ ${result3["HTT"]} -eq null ]]
+                then
+                    result3["HTT"]=1
+                else
+                    result3["HTT"]=$((${result3["HTT"]}+1))
+                fi
+            fi
+        fi
+    else
+        if [[ $flip2 -eq 1 ]]
+        then
+            if [[ $flip3 -eq 1 ]]
+            then
+                if [[ ${result3["THH"]} -eq null ]]
+                then
+                    result3["THH"]=1
+                else
+                    result3["THH"]=$((${result3["THH"]}+1))
+                fi
+            else
+                if [[ ${result3["THT"]} -eq null ]]
+                then
+                    result3["THT"]=1
+                else
+                    result3["THT"]=$((${result3["THT"]}+1))
+                fi
+            fi
+        else
+            if [[ $flip3 -eq 1 ]]
+            then
+                if [[ ${result3["TTH"]} -eq null ]]
+                then
+                    result3["TTH"]=1
+                else
+                    result3["TTH"]=$((${result3["TTH"]}+1))
+                fi
+            else
+                if [[ ${result3["TTT"]} -eq null ]]
+                then
+                    result3["TTT"]=1
+                else
+                    result3["TTT"]=$((${result3["TTT"]}+1))
+                fi
+            fi
+        fi
+    fi
+
+done
+
+echo The win percentage of each combination in the triplet coin toss:
+
+for i in ${!result3[@]}
+do
+	percentWin=$( echo ${result3[$i]} $iteration | awk '{print $1/$2 * 100}' )
+	echo "$i => $percentWin %"
 done
 
 
