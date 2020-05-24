@@ -60,7 +60,11 @@ do
 done
 
 
+echo The win percentage of each combination in the doublet coin toss:
 for i in ${!result[@]}
 do
-	echo "$i => ${result[$i]}"
+   percentWin=$( echo ${result[$i]} $iteration | awk '{print $1/$2 * 100}' )
+   echo "$i => $percentWin %"
 done
+
+
