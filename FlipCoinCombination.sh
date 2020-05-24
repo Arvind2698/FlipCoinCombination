@@ -36,12 +36,25 @@ done
 
 echo The win percentage of each combination in the singlet coin toss:
 
+
 for i in ${!result1[@]}
 do
    percentWin=$( echo ${result1[$i]} $iteration | awk '{print $1/$2 * 100}' )
    echo "$i => $percentWin %"
 done
 
+
+max1="H"
+
+for i in ${!result1[@]}
+do
+   if [[ ${result1[$i]} -gt ${result1[$max1]} ]]
+	then
+		max1=$i
+	fi
+done
+
+echo The winner of the Singlet coin toss : $max1
 
 
 
@@ -108,6 +121,19 @@ do
    percentWin=$( echo ${result2[$i]} $iteration | awk '{print $1/$2 * 100}' )
    echo "$i => $percentWin %"
 done
+
+max2="HH"
+
+for i in ${!result2[@]}
+do
+   if [[ ${result2[$i]} -gt ${result2[$max2]} ]]
+   then
+      max2=$i
+   fi
+done
+
+echo The winner of the Doublet coin toss : $max2
+
 
 
 declare -A result3
@@ -208,4 +234,15 @@ do
 	echo "$i => $percentWin %"
 done
 
+max3="HHH"
+
+for i in ${!result3[@]}
+do
+   if [[ ${result3[$i]} -gt ${result3[$max3]} ]]
+   then
+      max3=$i
+   fi
+done
+
+echo The winner of the Singlet toss : $max3
 
